@@ -1,0 +1,89 @@
+/* Sidebar container */
+.sidebar {
+  width: 60px; /* collapsed width */
+  height: 100vh;
+  background: linear-gradient(180deg, #2c3e50, #34495e);
+  color: #ecf0f1;
+  padding: 1rem 0.5rem;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Expand on hover */
+.sidebar:hover {
+  width: 220px; /* expanded width */
+}
+
+/* App title */
+.menu-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 0 2rem;
+  text-align: center;
+  color: #f1c40f;
+  letter-spacing: 1px;
+  transition: opacity 0.3s;
+}
+
+/* Menu list */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Each item */
+.menu-list li {
+  margin-bottom: 1rem;
+}
+
+/* Links */
+.menu-list a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #bdc3c7;
+  font-size: 1rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Icon only when collapsed */
+.menu-list .icon {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+/* Label (hidden when collapsed) */
+.menu-list .label {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Show label when expanded */
+.sidebar:hover .label {
+  opacity: 1;
+}
+
+/* Hover effect */
+.menu-list a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+/* Active route */
+.menu-list a.active {
+  background: #f1c40f;
+  color: #2c3e50;
+  font-weight: bold;
+}
+.profile-icon {
+  filter: hue-rotate(45deg) brightness(1.4); /* gives yellowish tint */
+}
