@@ -21,14 +21,13 @@
           <td>{{ product.size }}</td>
           <td>{{ product.price | currency:'INR' }}</td>
           <td>
-            <!-- <button class="btn edit" (click)="openModal()">Edit</button> -->
 
-            <button class="btn edit" data-bs-toggle="modal" data-bs-target="#productModal">
+            <button class="btn edit" data-bs-toggle="modal" data-bs-target="#productModal"
+              (click)="prefillModal(product)">
               Edit
             </button>
-
-
             <button class="btn delete">Delete</button>
+
           </td>
         </tr>
       </tbody>
@@ -93,7 +92,7 @@
       <!-- Footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" [disabled]="productForm.invalid">Save</button>
       </div>
     </div>
   </div>

@@ -73,11 +73,19 @@ export class ProductsComponent {
     }
   }
 
+  prefillModal(product: any) {
+    this.openModal();
+    this.productForm.patchValue({
+      name: product.name,
+      price: product.price,
+      brand: product.brand,
+      size: product.size
+    });
+  }
+
   openModal() {
     console.log("Opening modal");
     this.isModalOpen = true;
-    //this.modalService.open(content, { size: 'lg', centered: true });
-    //this.productForm.reset(); // optional
   }
 
   closeModal() {

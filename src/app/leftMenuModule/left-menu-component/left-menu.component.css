@@ -42,7 +42,6 @@
 .menu-list {
   list-style: none;
   padding: 0.5rem;
-  /* balanced space inside */
   margin: 0;
 }
 
@@ -110,12 +109,10 @@
 /* Active item - expanded state */
 .sidebar:hover .menu-list a.active {
   background: #f1c40f;
-  /* yellow only in expanded mode */
   color: #2c3e50;
   font-weight: bold;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   justify-content: flex-start;
-  /* reset to normal */
   padding-left: 1rem;
 }
