@@ -56,18 +56,26 @@
               <input type="text" formControlName="name" class="form-control" />
               <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched"
                 class="text-danger small">
-                Name is required
+                Brand is required
               </div>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Brand</label>
               <input type="text" formControlName="brand" class="form-control" />
+              <div *ngIf="productForm.get('brand')?.invalid && productForm.get('brand')?.touched"
+                class="text-danger small">
+                Name is required
+              </div>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Size</label>
               <input type="text" formControlName="size" class="form-control" />
+              <div *ngIf="productForm.get('size')?.invalid && productForm.get('size')?.touched"
+                class="text-danger small">
+                Name is required
+              </div>
             </div>
 
             <div class="mb-3">
@@ -90,10 +98,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-Ask ChatGPT

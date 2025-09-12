@@ -19,8 +19,8 @@ export class ProductsComponent {
   constructor(private readonly productService: ProductService, private modalService: NgbModal, private fb: FormBuilder) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
-      brand: [''],
-      size: [''],
+      brand: ['', Validators.required],
+      size: ['', Validators.required],
       price: [null, [Validators.required, Validators.min(1)]]
     });
   }
