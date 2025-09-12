@@ -2,18 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ProductService } from '../products-service/products.service';
 import { Subscription } from 'rxjs';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
-  constructor(private readonly productService: ProductService) { }
+  constructor(private readonly productService: ProductService, private modalService: NgbModal) { }
   products: any;
   Subscriber: Subscription[] = [];
+  isModalOpen = false;
 
   ngOnInit() {
     console.log("ProductsComponent initialized");
@@ -52,6 +54,24 @@ export class ProductsComponent {
       }));
   }
 
+   saveProduct() {
+    // if (this.productForm.valid) {
+    //   console.log('Product saved:', this.productForm.value);
+    //   this.modalService.dismissAll(); // close modal after save
+    // }
+  }
+
+  openModal() {
+    console.log("Opening modal");
+    this.isModalOpen = true;
+     //this.modalService.open(content, { size: 'lg', centered: true });
+    //this.productForm.reset(); // optional
+  }
+
+  closeModal() {
+    console.log("Closing modal");
+    this.isModalOpen = false;
+  }
 
   ngOnDestroy() {
     // Clean up all subscriptions
