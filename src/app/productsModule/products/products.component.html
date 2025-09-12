@@ -1,1 +1,31 @@
-<p>products works!</p>
+<div class="products-page">
+  <h2 class="page-title">Products</h2>
+
+  <div class="table-wrapper">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Size</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.brand }}</td>
+          <td>{{ product.size }}</td>
+          <td>{{ product.price | currency:'INR' }}</td>
+          <td>
+            <button class="btn edit">Edit</button>
+            <button class="btn delete">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
