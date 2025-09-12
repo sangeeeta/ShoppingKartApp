@@ -3,16 +3,27 @@ import { Component } from '@angular/core';
 import { ProductService } from '../products-service/products.service';
 import { Subscription } from 'rxjs';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, NgbModule],
+  imports: [CommonModule, NgbModule, ReactiveFormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
-  constructor(private readonly productService: ProductService, private modalService: NgbModal) { }
+
+  productForm: any;
+
+  constructor(private readonly productService: ProductService, private modalService: NgbModal, private fb: FormBuilder) {
+    this.productForm = this.fb.group({
+      name: ['', Validators.required],
+      brand: [''],
+      size: [''],
+      price: [null, [Validators.required, Validators.min(1)]]
+    });
+  }
   products: any;
   Subscriber: Subscription[] = [];
   isModalOpen = false;
@@ -20,6 +31,7 @@ export class ProductsComponent {
   ngOnInit() {
     console.log("ProductsComponent initialized");
     this.fetchAllProducts();
+
   }
 
   fetchAllProducts() {
@@ -54,17 +66,17 @@ export class ProductsComponent {
       }));
   }
 
-   saveProduct() {
-    // if (this.productForm.valid) {
-    //   console.log('Product saved:', this.productForm.value);
-    //   this.modalService.dismissAll(); // close modal after save
-    // }
+  saveProduct() {
+    if (this.productForm.valid) {
+      console.log('Form Values:', this.productForm.value);
+      // here you could push to products array or send to API
+    }
   }
 
   openModal() {
     console.log("Opening modal");
     this.isModalOpen = true;
-     //this.modalService.open(content, { size: 'lg', centered: true });
+    //this.modalService.open(content, { size: 'lg', centered: true });
     //this.productForm.reset(); // optional
   }
 
