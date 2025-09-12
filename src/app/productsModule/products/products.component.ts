@@ -2,12 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ProductService } from '../products-service/products.service';
 import { Subscription } from 'rxjs';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -15,9 +14,6 @@ export class ProductsComponent {
   constructor(private readonly productService: ProductService) { }
   products: any;
   Subscriber: Subscription[] = [];
-
-  // Define the expected response type
-  private static readonly defaultResponse = { responseData: [] };
 
   ngOnInit() {
     console.log("ProductsComponent initialized");
@@ -27,7 +23,7 @@ export class ProductsComponent {
   fetchAllProducts() {
     console.log("Fetching all products...");
 
-     this.Subscriber.push(
+    this.Subscriber.push(
       this.productService.getProductsList().subscribe({
         next: (response: any) => {
           console.log("Products fetched successfully:", response);
@@ -40,28 +36,6 @@ export class ProductsComponent {
           }
         }
       }));
-
-
-
-    // this.Subscriber.push(this.productService.getProductsList().subscribe(
-    //   (response: any) => {
-    //     console.log("Products fetched successfully:", response);
-    //     this.products = response.responseData;
-    //   },
-    //   (error: any) => {
-    //     console.error("Error fetching products:", error);
-    //     if (error.status === 400) {
-    //       console.error("Bad Request Details:", error.error);
-    //     }
-    //   }
-    // ));
-
-
-    
-  }
-
-  editProduct(productId: number) {
-    console.log("Edit product functionality to be implemented.");
   }
 
   deleteProduct(productId: number) {
