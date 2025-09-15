@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../products-service/products.service';
 import { Subscription } from 'rxjs';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -15,38 +15,38 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 export class ProductsComponent {
 
   productForm: any;
+  private modalRef!: NgbModalRef;
+  products: any[] = [];
+  Subscriber: Subscription[] = [];
+  //isModalOpen = false;
 
   constructor(private readonly productService: ProductService, private modalService: NgbModal, private fb: FormBuilder) {
     this.productForm = this.fb.group({
+      id: [0],
       name: ['', Validators.required],
       brand: ['', Validators.required],
       size: ['', Validators.required],
       price: [null, [Validators.required, Validators.min(1)]]
     });
   }
-  products: any;
-  Subscriber: Subscription[] = [];
-  isModalOpen = false;
+
 
   ngOnInit() {
-    console.log("ProductsComponent initialized");
     this.fetchAllProducts();
 
   }
 
   fetchAllProducts() {
-    console.log("Fetching all products...");
-
     this.Subscriber.push(
       this.productService.getProductsList().subscribe({
         next: (response: any) => {
-          console.log("Products fetched successfully:", response);
-          this.products = response.responseData;
+          //this.products = response.responseData;
+          this.products = response.responseData.sort((a: any, b: any) =>
+            a.name.localeCompare(b.name)
+          );
         },
         error: (error) => {
-          console.error("Error fetching products:", error);
           if (error.status === 400) {
-            console.error("Bad Request Details:", error.error);
           }
         }
       }));
@@ -66,16 +66,32 @@ export class ProductsComponent {
       }));
   }
 
-  saveProduct() {
+  saveUpdateProduct() {
     if (this.productForm.valid) {
-      console.log('Form Values:', this.productForm.value);
-      // here you could push to products array or send to API
+      const productData = { ...this.productForm.value };
+      if (!productData.id || productData.id === 0) {//for new product
+        delete productData.id;
+      }
+      this.productService.saveUpdateOrdrer(this.productForm.value).subscribe({
+        next: (response: any) => {
+          if (response?.code === 200) {
+            this.fetchAllProducts();
+            this.closeModal();
+          }
+        },
+        error: (error: { status: number; error: any; }) => {
+          if (error.status === 400) {
+            console.error("Bad Request Details:", error.error);
+          }
+        }
+      });
     }
   }
 
-  prefillModal(product: any) {
-    this.openModal();
+  prefillModal(product: any, productModal: any) {
+    this.openModal(productModal);
     this.productForm.patchValue({
+      id: product.id,
       name: product.name,
       price: product.price,
       brand: product.brand,
@@ -83,14 +99,21 @@ export class ProductsComponent {
     });
   }
 
-  openModal() {
-    console.log("Opening modal");
-    this.isModalOpen = true;
+  newProduct(isNew: boolean) {
+    if (isNew) {
+      this.productForm.reset();
+      this.productForm.patchValue({ id: 0 });
+    }
+  }
+
+  openModal(content: any) {
+    this.modalRef = this.modalService.open(content, { centered: true });
   }
 
   closeModal() {
-    console.log("Closing modal");
-    this.isModalOpen = false;
+    if (this.modalRef) {
+      this.modalRef.dismiss(); // or this.modalRef.close();
+    }
   }
 
   ngOnDestroy() {

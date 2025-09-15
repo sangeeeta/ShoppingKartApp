@@ -1,5 +1,10 @@
 <div class="products-page">
-  <h2 class="page-title">Products</h2>
+  <div class="header-with-action">
+    <h2 class="page-title">Products</h2>
+    <button class="btn add-btn" (click)="openModal(productModal); newProduct(true)">
+      <i class="bi bi-plus-lg"></i> <!-- Bootstrap Icons -->
+    </button>
+  </div>
 
   <div class="table-wrapper">
     <table class="custom-table">
@@ -21,13 +26,10 @@
           <td>{{ product.size }}</td>
           <td>{{ product.price | currency:'INR' }}</td>
           <td>
-
-            <button class="btn edit" data-bs-toggle="modal" data-bs-target="#productModal"
-              (click)="prefillModal(product)">
+            <button class="btn edit" (click)="prefillModal(product, productModal)">
               Edit
             </button>
             <button class="btn delete">Delete</button>
-
           </td>
         </tr>
       </tbody>
@@ -35,65 +37,36 @@
   </div>
 </div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <!-- Header -->
-      <div class="modal-header">
-        <h5 class="modal-title">Product Modal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <!-- Body -->
-      <div class="modal-body">
-        <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
-          <div class="modal-body">
-            <div class="mb-3">
-              <label class="form-label">Name</label>
-              <input type="text" formControlName="name" class="form-control" />
-              <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched"
-                class="text-danger small">
-                Brand is required
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Brand</label>
-              <input type="text" formControlName="brand" class="form-control" />
-              <div *ngIf="productForm.get('brand')?.invalid && productForm.get('brand')?.touched"
-                class="text-danger small">
-                Name is required
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Size</label>
-              <input type="text" formControlName="size" class="form-control" />
-              <div *ngIf="productForm.get('size')?.invalid && productForm.get('size')?.touched"
-                class="text-danger small">
-                Name is required
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Price</label>
-              <input type="number" formControlName="price" class="form-control" />
-              <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"
-                class="text-danger small">
-                Price must be greater than 0
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <!-- Footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" [disabled]="productForm.invalid">Save</button>
-      </div>
-    </div>
+<!-- product.component.html -->
+<ng-template #productModal let-modal>
+  <div class="modal-header custom-modal-header">
+    <h5 class="modal-title">Product Modal</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
   </div>
-</div>
+
+  <div class="modal-body">
+    <form [formGroup]="productForm">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" formControlName="name" class="form-control"/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Brand</label>
+        <input type="text" formControlName="brand" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Size</label>
+        <input type="text" formControlName="size" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input type="number" formControlName="price" class="form-control" />
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="productForm.invalid" (click)="saveUpdateProduct()">Save</button>
+  </div>
+</ng-template>

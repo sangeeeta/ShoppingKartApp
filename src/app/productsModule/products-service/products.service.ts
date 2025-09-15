@@ -24,11 +24,7 @@ export class ProductService {
   // Get all products
   getProductsList() {
     const url = `${this.baseUrl}/${apiUrls.getAllProducts}`;
-    // const header = new HttpHeaders({
-    //   'content-type': this.contentType
-    // });
-    return this.http.get(url, { //headers: header 
-    });
+    return this.http.get(url, {});
   }
 
   // Get a single product by ID
@@ -43,15 +39,14 @@ export class ProductService {
   }
 
   //Save product
-  saveUpdateProduct(product: Product) {
-    const url = `${this.baseUrl}/${apiUrls.saveOrdrer}`;
+  saveUpdateOrdrer(product: Product) {
+    const url = `${this.baseUrl}/${apiUrls.saveUpdateOrdrer}`;
     const header = new HttpHeaders({
       'content-type': this.contentType
     });
     const requestBody = JSON.stringify(product);
     return this.http.post(url, requestBody, { headers: header });
   }
-
   // Delete product by ID
   deleteProduct(id: number) {
     const url = `${this.baseUrl}/${apiUrls.deleteOrder}`;
