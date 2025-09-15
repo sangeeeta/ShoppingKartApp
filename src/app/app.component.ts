@@ -4,6 +4,7 @@ import { LeftMenuComponent } from './leftMenuModule/left-menu-component/left-men
 import { SharedModule } from './sharedModule/shared.module';
 import { AuthService } from './auth/service/auth.service';
 import { CommonModule } from '@angular/common';
+import { MENU_ITEMS } from './leftMenuModule/menu-items';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +41,7 @@ export class AppComponent {
     if (this.isLoggedIn) {
       const role = this.authService.getRole();
       if (role) {
-        //this.menuItems = MENU_ITEMS[role];
+        this.menuItems = MENU_ITEMS[role];
         this.authService.loadRoutesForRole(role); // inject role-specific routes
       }
     }

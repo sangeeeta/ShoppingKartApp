@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { MenuItem } from '../menu-items';
 
 @Component({
   selector: 'app-left-menu',  standalone: true,
@@ -9,6 +10,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './left-menu.component.css'
 })
 export class LeftMenuComponent {
+   @Input() menuItems: MenuItem[] = [];
+   
   ngOnInit() {
     debugger;
   }
