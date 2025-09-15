@@ -1,0 +1,32 @@
+/* Full height, center content */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full viewport height */
+  background: #f8f9fa; /* light background */
+}
+
+/* Small login box */
+.login-container {
+  width: 100%;
+  max-width: 400px;  /* fixed width */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  background: #fff;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.is-invalid {
+  border: 1px solid red;
+}
+
+.invalid-feedback {
+  color: red;
+  font-size: 12px;
+}
