@@ -1,0 +1,14 @@
+.alert-container {
+  position: fixed;
+  bottom: 30px;       /* distance from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;      /* above other content */
+  width: auto;
+  max-width: 400px;   /* optional: limit width */
+}
+
+.alert {
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}

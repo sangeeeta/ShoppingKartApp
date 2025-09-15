@@ -4,6 +4,8 @@ import { ProductService } from '../products-service/products.service';
 import { Subscription } from 'rxjs';
 import { NgbModal, NgbModalRef, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { AlertService } from '../../sharedModule/services/alert.service';
+
 
 @Component({
   selector: 'app-products',
@@ -20,7 +22,12 @@ export class ProductsComponent {
   Subscriber: Subscription[] = [];
   //isModalOpen = false;
 
-  constructor(private readonly productService: ProductService, private modalService: NgbModal, private fb: FormBuilder) {
+  constructor(
+    private readonly productService: ProductService,
+    private modalService: NgbModal,
+    private fb: FormBuilder,
+    private alertService: AlertService
+  ) {
     this.productForm = this.fb.group({
       id: [0],
       name: ['', Validators.required],
@@ -40,13 +47,13 @@ export class ProductsComponent {
     this.Subscriber.push(
       this.productService.getProductsList().subscribe({
         next: (response: any) => {
-          //this.products = response.responseData;
           this.products = response.responseData.sort((a: any, b: any) =>
             a.name.localeCompare(b.name)
           );
         },
         error: (error) => {
           if (error.status === 400) {
+            this.alertService.showAlert('danger', 'Product not fetched!');
           }
         }
       }));
@@ -75,6 +82,7 @@ export class ProductsComponent {
       this.productService.saveUpdateOrdrer(this.productForm.value).subscribe({
         next: (response: any) => {
           if (response?.code === 200) {
+            this.alertService.showAlert('success', 'Product saved successfully!');
             this.fetchAllProducts();
             this.closeModal();
           }
@@ -82,6 +90,7 @@ export class ProductsComponent {
         error: (error: { status: number; error: any; }) => {
           if (error.status === 400) {
             console.error("Bad Request Details:", error.error);
+            this.alertService.showAlert('danger', 'Product not saved!');
           }
         }
       });
