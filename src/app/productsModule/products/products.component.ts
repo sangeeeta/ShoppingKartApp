@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductService } from '../products-service/products.service';
 import { Subscription } from 'rxjs';
 import { NgbModal, NgbModalRef, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AlertService } from '../../sharedModule/services/alert.service';
+import { responseCode } from '../../sharedModule/constants/responseCode';
 
 
 @Component({
@@ -20,7 +21,6 @@ export class ProductsComponent {
   private modalRef!: NgbModalRef;
   products: any[] = [];
   Subscriber: Subscription[] = [];
-  //isModalOpen = false;
 
   constructor(
     private readonly productService: ProductService,
@@ -63,14 +63,31 @@ export class ProductsComponent {
     console.log(`Deleting product with ID: ${productId}`);
     this.Subscriber.push(
       this.productService.deleteProduct(productId).subscribe({
-        next: (response) => {
-          console.log("Product deleted successfully:", response);
-          this.fetchAllProducts(); // Refresh the product list
+        next: (response: any) => {
+          if (response?.code === responseCode[200]) {
+            console.log("Product deleted successfully:", response);
+            this.alertService.showAlert('success', 'Product deleted successfully!');
+            this.fetchAllProducts(); // Refresh the product list
+          }
         },
         error: (error) => {
           console.error("Error deleting product:", error);
         }
       }));
+  }
+
+  // Open confirmation modal
+  openConfirmModal(content: any, id: number) {
+    this.modalService.open(content, { centered: true }).result.then(
+      (result) => {
+        if (result === 'yes') {
+          this.deleteProduct(id);
+        }
+      },
+      () => {
+        // dismissed
+      }
+    );
   }
 
   saveUpdateProduct() {
@@ -81,7 +98,7 @@ export class ProductsComponent {
       }
       this.productService.saveUpdateOrdrer(this.productForm.value).subscribe({
         next: (response: any) => {
-          if (response?.code === 200) {
+          if (response?.code === responseCode[200]) {
             this.alertService.showAlert('success', 'Product saved successfully!');
             this.fetchAllProducts();
             this.closeModal();
@@ -126,7 +143,6 @@ export class ProductsComponent {
   }
 
   ngOnDestroy() {
-    // Clean up all subscriptions
     this.Subscriber.forEach(sub => sub.unsubscribe());
   }
 
