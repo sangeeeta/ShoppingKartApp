@@ -9,5 +9,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './left-menu.component.css'
 })
 export class LeftMenuComponent {
+  ngOnInit() {
+    debugger;
+  }
 
 }

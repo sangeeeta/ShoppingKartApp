@@ -3,23 +3,47 @@ import { RouterOutlet } from '@angular/router';
 import { LeftMenuComponent } from './leftMenuModule/left-menu-component/left-menu.component';
 import { SharedModule } from './sharedModule/shared.module';
 import { AuthService } from './auth/service/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LeftMenuComponent, SharedModule],
+  imports: [RouterOutlet, LeftMenuComponent, SharedModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+    // subscribe to login changes
+    this.authService.loggedIn$.subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+
+      if (loggedIn) {
+        const role = this.authService.getRole();
+        if (role) {
+          //this.menuItems = MENU_ITEMS[role];
+        }
+      } else {
+        this.menuItems = [];
+      }
+    });
+
+  }
   title = 'my-app';
+  isLoggedIn = false;
+  menuItems: { label: string, path: string }[] = [];
 
   ngOnInit() {
-    const role = this.authService.getRole();
-    if (role) {
-      // Load role routes dynamically on app start
-      this.authService.loadRoutesForRole(role);
+    // Check token in localStorage
+    this.isLoggedIn = this.authService.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      const role = this.authService.getRole();
+      if (role) {
+        //this.menuItems = MENU_ITEMS[role];
+        this.authService.loadRoutesForRole(role); // inject role-specific routes
+      }
     }
   }
+
 }

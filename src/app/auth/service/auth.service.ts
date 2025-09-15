@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ADMIN_ROUTES } from '../../admin/admin-routing.module';
 import { DEALER_ROUTES } from '../../dealer/dealer-routing.module';
 import { PRODUCTS_ROUTES } from '../../productsModule/products-routing.module';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
   private apiUrl = 'https://yourapi.com/api/auth';
+  private loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
+  loggedIn$ = this.loggedInSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -29,6 +32,7 @@ export class AuthService {
       const res = { token: '12345', role: 'admin' };
       localStorage.setItem('token', res.token);
       localStorage.setItem('role', res.role);
+      this.loggedInSubject.next(true);
       observer.next(res);
       observer.complete();
     });
@@ -38,13 +42,14 @@ export class AuthService {
     return localStorage.getItem('role');
   }
 
-  logout() {
-    localStorage.clear();
-    this.router.navigate(['/auth/login']);
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token'); // true only if token exists
   }
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+  logout() {
+    localStorage.clear();
+    this.loggedInSubject.next(false);
+    this.router.navigate(['/auth/login']);
   }
 
   loadRoutesForRole(role: string) {

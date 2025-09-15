@@ -1,27 +1,27 @@
 
-/* Sidebar collapsed (only icons visible or hidden) */
+/* 
 .sidebar {
-  position: absolute;          /* Overlay on top of content */
+  position: absolute;         
   top: 0;
   left: 0;
   height: 100%;
-  width: 60px;                 /* Collapsed width */
+  width: 60px;                 
   background: #343a40;
   color: #fff;
   transition: width 0.3s ease;
   overflow: hidden;
-  z-index: 1000;               /* Ensure it overlays */
+  z-index: 1000;               
 }
 
-/* Sidebar expand on hover */
+
 .sidebar:hover {
-  width: 220px;                /* Expanded width */
+  width: 220px;               
 }
 
-/* Content always takes full width (unaffected by sidebar) */
+
 .content {
   flex: 1;
-  width: 100%;                 /* Always full width */
+  width: 100%;                
   padding: 20px;
   overflow-y: auto;
-}
+} */

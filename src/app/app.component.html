@@ -1,6 +1,9 @@
 <div class="layout">
   <div class="sidebar">
-    <!-- <app-left-menu></app-left-menu> -->
+    <div *ngIf="isLoggedIn">
+       <app-left-menu></app-left-menu>
+    </div>   
+     <!-- <app-left-menu [menuItems]="menuItems"></app-left-menu>  -->
   </div>
   <div class="content">
     <app-alert></app-alert>
