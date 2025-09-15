@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MenuItem } from '../menu-items';
 
@@ -7,7 +7,8 @@ import { MenuItem } from '../menu-items';
   selector: 'app-left-menu',  standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './left-menu.component.html',
-  styleUrl: './left-menu.component.css'
+  styleUrl: './left-menu.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LeftMenuComponent {
    @Input() menuItems: MenuItem[] = [];

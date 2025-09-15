@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LeftMenuComponent } from './leftMenuModule/left-menu-component/left-menu.component';
 import { SharedModule } from './sharedModule/shared.module';
@@ -11,7 +11,9 @@ import { MENU_ITEMS } from './leftMenuModule/menu-items';
   standalone: true,
   imports: [RouterOutlet, LeftMenuComponent, SharedModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class AppComponent {
   constructor(private authService: AuthService) {
