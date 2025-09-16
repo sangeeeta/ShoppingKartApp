@@ -6,22 +6,30 @@ export interface MenuItem {
 }
 
 export const MENU_ITEMS: Record<string, MenuItem[]> = {
+  admin: [
+    { label: 'Dashboard', path: '/admin', icon: 'noto-v1:shopping-cart' },
+    { label: 'Users Management', path: '/user/usersManagement', icon: 'group' },
+    { label: 'Dealers Management', path: '/admin/orders', icon: 'list_alt' },
+    { label: 'Products Management', path: '/admin/products', icon: 'noto-v1:shopping-cart' },
+    { label: 'Orders Management', path: '/admin/products', icon: 'noto-v1:shopping-cart' },
+    { label: 'Reports / Analytics ', path: '/admin/products', icon: 'noto-v1:shopping-cart' },
+    { label: 'Settings', path: '/admin/products', icon: 'noto-v1:shopping-cart' }
+  ],
   customer: [
+    { label: 'Dashboard', path: '/products', icon: 'shopping_cart' },
     { label: 'Products', path: '/products', icon: 'shopping_cart' },
-    { label: 'Orders', path: '/orders', icon: 'list_alt' },
-    { label: 'Cart', path: '/cart', icon: 'noto-v1:shopping-cart' },
-    { label: 'Profile', path: '/profile', icon: 'person' }
+    { label: 'Cart', path: '/orders', icon: 'list_alt' },
+    { label: 'Orders', path: '/cart', icon: 'noto-v1:shopping-cart' },
+    { label: 'Wishlist ', path: '/profile', icon: 'person' },
+    { label: 'Profile ', path: '/profile', icon: 'person' },
+    { label: 'Support/Help ', path: '/profile', icon: 'person' }
   ],
   dealer: [
     { label: 'Dashboard', path: '/dealer', icon: 'dashboard' },
-    { label: 'Manage Orders', path: '/dealer/orders', icon: 'list_alt' },
     { label: 'Products', path: '/dealer/products', icon: 'inventory' },
-    { label: 'Profile', path: '/dealer/profile', icon: 'person' }
-  ],
-  admin: [
-    { label: 'Admin Dashboard', path: '/admin', icon: 'dashboard' },
-    { label: 'Users', path: '/admin/users', icon: 'group' },
-    { label: 'Orders', path: '/admin/orders', icon: 'list_alt' },
-    { label: 'Products', path: '/admin/products', icon: 'noto-v1:shopping-cart' }
+    { label: 'Orders', path: '/dealer/products', icon: 'inventory' },
+    { label: 'Inventory / Stock', path: '/dealer/products', icon: 'inventory' },
+    { label: 'Payments', path: '/dealer/orders', icon: 'list_alt' },
+    { label: 'Profile/Store Settings', path: '/dealer/profile', icon: 'person' }
   ]
 };
