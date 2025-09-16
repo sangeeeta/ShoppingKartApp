@@ -18,18 +18,18 @@ export const MENU_ITEMS: Record<string, MenuItem[]> = {
   customer: [
     { label: 'Dashboard', path: '/products', icon: 'shopping_cart' },
     { label: 'Products', path: '/products', icon: 'shopping_cart' },
-    { label: 'Cart', path: '/orders', icon: 'list_alt' },
+    { label: 'Cart', path: '/orders', icon: 'noto-v1:shopping-cart' },
     { label: 'Orders', path: '/cart', icon: 'noto-v1:shopping-cart' },
     { label: 'Wishlist ', path: '/profile', icon: 'person' },
     { label: 'Profile ', path: '/profile', icon: 'person' },
     { label: 'Support/Help ', path: '/profile', icon: 'person' }
   ],
   dealer: [
-    { label: 'Dashboard', path: '/dealer', icon: 'dashboard' },
-    { label: 'Products', path: '/dealer/products', icon: 'inventory' },
-    { label: 'Orders', path: '/dealer/products', icon: 'inventory' },
-    { label: 'Inventory / Stock', path: '/dealer/products', icon: 'inventory' },
-    { label: 'Payments', path: '/dealer/orders', icon: 'list_alt' },
-    { label: 'Profile/Store Settings', path: '/dealer/profile', icon: 'person' }
+    { label: 'Dashboard', path: '/dealer', icon: 'noto-v1:japanese-post-office' },
+    { label: 'Products', path: '/dealer/products', icon: 'noto-v1:sushi' },
+    { label: 'Orders', path: '/dealer/products', icon: 'noto-v1:shopping-bags' },
+    { label: 'Inventory / Stock', path: '/dealer/products', icon: 'noto-v1:factory' },
+    { label: 'Payments', path: '/dealer/orders', icon: 'noto-v1:money-bag' },
+    { label: 'Profile/Store Settings', path: '/dealer/profile', icon: 'noto-v1:gear' }
   ]
 };

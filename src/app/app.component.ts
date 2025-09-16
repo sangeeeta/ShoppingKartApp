@@ -24,7 +24,7 @@ export class AppComponent {
       if (loggedIn) {
         const role = this.authService.getRole();
         if (role) {
-          //this.menuItems = MENU_ITEMS[role];
+          this.menuItems = MENU_ITEMS[role];
         }
       } else {
         this.menuItems = [];
