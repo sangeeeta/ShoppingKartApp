@@ -1,5 +1,5 @@
 <div class="layout">
-  <div class="sidebar">
+  <div class="sidebar" [ngClass]="{'empty': !isLoggedIn}">
     <div *ngIf="isLoggedIn">
        <app-left-menu [menuItems]="menuItems"></app-left-menu>
     </div>   

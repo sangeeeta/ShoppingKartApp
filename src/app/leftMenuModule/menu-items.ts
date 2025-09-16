@@ -27,9 +27,9 @@ export const MENU_ITEMS: Record<string, MenuItem[]> = {
   dealer: [
     { label: 'Dashboard', path: '/dealer', icon: 'noto-v1:japanese-post-office' },
     { label: 'Products', path: '/dealer/products', icon: 'noto-v1:sushi' },
-    { label: 'Orders', path: '/dealer/products', icon: 'noto-v1:shopping-bags' },
-    { label: 'Inventory / Stock', path: '/dealer/products', icon: 'noto-v1:factory' },
-    { label: 'Payments', path: '/dealer/orders', icon: 'noto-v1:money-bag' },
-    { label: 'Profile/Store Settings', path: '/dealer/profile', icon: 'noto-v1:gear' }
+    // { label: 'Orders', path: '/dealer/products', icon: 'noto-v1:shopping-bags' },
+    // { label: 'Inventory / Stock', path: '/dealer/products', icon: 'noto-v1:factory' },
+    // { label: 'Payments', path: '/dealer/orders', icon: 'noto-v1:money-bag' },
+    // { label: 'Profile/Store Settings', path: '/dealer/profile', icon: 'noto-v1:gear' }
   ]
 };

@@ -34,6 +34,7 @@ export class LoginComponent {
       next: (res) => {
         const role = res.role;
         this.authService.loadRoutesForRole(role);
+        if (role === 'dealer') this.router.navigate(['/dealer']);
       },
       error: (err) => {
         console.error(err);

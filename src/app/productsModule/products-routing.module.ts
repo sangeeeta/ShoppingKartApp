@@ -5,10 +5,10 @@ import { authGuard } from '../auth/guard/auth.guard';
 
 export const PRODUCTS_ROUTES: Routes = [
   {
-    path: 'products',
-    component: ProductsComponent,
-    canActivate: [authGuard]
-  }
+  path: 'products',
+  component: ProductsComponent, // standalone
+  canActivate: [authGuard]
+}
 ];
 
 @NgModule({

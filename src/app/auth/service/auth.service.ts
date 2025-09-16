@@ -29,7 +29,7 @@ export class AuthService {
 
     // Mocked login response using RxJS 'of'
     return new Observable<any>((observer) => {
-      const res = { token: '12345', role: 'admin' };
+      const res = { token: '12345', role: 'dealer' };
       localStorage.setItem('token', res.token);
       localStorage.setItem('role', res.role);
       this.loggedInSubject.next(true);
@@ -59,17 +59,12 @@ export class AuthService {
     else if (role === 'dealer') roleRoutes = DEALER_ROUTES;
     else if (role === 'customer') roleRoutes = PRODUCTS_ROUTES;
 
-    // Inject role-specific routes dynamically
+    if (!roleRoutes || roleRoutes.length === 0) return; // safety check
     this.router.resetConfig([
-      ...this.router.config.filter(r => r.path !== '' && r.path !== '**'), // keep login/public routes
+      ...this.router.config.filter(r => r.path !== '' && r.path !== '**'),
       ...roleRoutes,
       { path: '**', redirectTo: '/login' }
     ]);
-
-    // navigate to role-specific dashboard
-    if (role === 'admin') this.router.navigate(['/admin']);
-    else if (role === 'dealer') this.router.navigate(['/dealer']);
-    else if (role === 'customer') this.router.navigate(['/products']);
   }
 
 }
