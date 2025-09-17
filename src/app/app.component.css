@@ -1,25 +1,3 @@
 .layout {
-  display: flex;
-  height: 100vh; /* full viewport height */
+  height: 100vh; 
 }
-
-.sidebar {
-  width: 210px; /* adjust width as needed */
-  overflow-y: auto; /* scroll if menu is long */
-}
-
-.content {
-  flex: 1; /* take remaining width */
-  padding: 20px; /* content padding */
-  overflow-y: auto; /* scroll if content is long */
-}
-
-.sidebar.empty {
-  width: 0;
-}
-
-.content {
-  flex: 1;
-  padding: 20px;
-}
-

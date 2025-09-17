@@ -7,8 +7,6 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, NgbModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -33,11 +31,10 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe({
       next: (res) => {
         const role = res.role;
-        this.authService.loadRoutesForRole(role);
-        if (role === 'dealer') this.router.navigate(['/dealer']);
+        this.navigateByRole(role);
       },
       error: (err) => {
-        console.error(err);
+        console.error('Login failed:', err);
       }
     });
   }
@@ -45,10 +42,24 @@ export class LoginComponent {
   ngOnInit() {
     const role = this.authService.getRole();
     if (role) {
-      // Already logged in, navigate directly
-      if (role === 'admin') this.authService.loadRoutesForRole('admin');
-      else if (role === 'dealer') this.authService.loadRoutesForRole('dealer');
-      else if (role === 'customer') this.authService.loadRoutesForRole('customer');
+      this.authService.loadRoutesForRole(role);
+      this.navigateByRole(role);
+    }
+  }
+
+  private navigateByRole(role: string) {
+    switch (role) {
+      case 'admin':
+        this.router.navigate(['/admin/dashboard']);
+        break;
+      case 'dealer':
+        this.router.navigate(['/dealer/dashboard']);
+        break;
+      case 'customer':
+        this.router.navigate(['/customer/dashboard']);
+        break;
+      default:
+        this.router.navigate(['/login']);
     }
   }
 

@@ -6,18 +6,14 @@ import { roleGuard } from '../auth/guard/role.guard';
 import { ProductsComponent } from '../productsModule/products/products.component';
 
 export const DEALER_ROUTES: Routes = [
-   {
-    path: 'dealer',
-    component: DealerDashboardComponent,
+  {
+    path: '', 
     canActivate: [authGuard, roleGuard],
     data: { role: 'dealer' },
     children: [
-      {
-        path: 'products',
-        component: ProductsComponent, // standalone component
-        canActivate: [authGuard]
-      },
-      // other dealer child routes like orders, profile etc.
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DealerDashboardComponent },
+      { path: 'products', component: ProductsComponent, canActivate: [authGuard] }
     ]
   }
 ];

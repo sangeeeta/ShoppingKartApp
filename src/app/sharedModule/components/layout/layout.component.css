@@ -1,0 +1,19 @@
+.layout-container {
+  display: flex;
+  height: 100vh; /* full viewport height */
+}
+
+.sidebar {
+  width: 210px; 
+  transition: width 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 60px; /* collapsed width */
+}
+
+.main-content {
+  flex: 1; /* take remaining space */
+  padding: 20px;
+  overflow: auto;
+}

@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { ADMIN_ROUTES } from '../../admin/admin-routing.module';
-import { DEALER_ROUTES } from '../../dealer/dealer-routing.module';
-import { PRODUCTS_ROUTES } from '../../productsModule/products-routing.module';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -54,10 +51,6 @@ export class AuthService {
 
   loadRoutesForRole(role: string) {
     let roleRoutes: Array<any> = [];
-
-    if (role === 'admin') roleRoutes = ADMIN_ROUTES;
-    else if (role === 'dealer') roleRoutes = DEALER_ROUTES;
-    else if (role === 'customer') roleRoutes = PRODUCTS_ROUTES;
 
     if (!roleRoutes || roleRoutes.length === 0) return; // safety check
     this.router.resetConfig([

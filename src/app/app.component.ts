@@ -1,15 +1,14 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LeftMenuComponent } from './leftMenuModule/left-menu-component/left-menu.component';
 import { SharedModule } from './sharedModule/shared.module';
 import { AuthService } from './auth/service/auth.service';
 import { CommonModule } from '@angular/common';
-import { MENU_ITEMS } from './leftMenuModule/menu-items';
+import { MENU_ITEMS } from './sharedModule/components/left-menu-component/menu-items';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LeftMenuComponent, SharedModule, CommonModule],
+  imports: [RouterOutlet, SharedModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -1,7 +1,7 @@
 <nav class="sidebar">
   <h3 class="menu-title">SA</h3>
 
-  <nav *ngIf="menuItems?.length" class="left-menu">
+  <nav class="left-menu">
     <ul class="menu-list">
       <li *ngFor="let item of menuItems">
         <a [routerLink]="item.path">

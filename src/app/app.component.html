@@ -1,11 +1,3 @@
 <div class="layout">
-  <div class="sidebar" [ngClass]="{'empty': !isLoggedIn}">
-    <div *ngIf="isLoggedIn">
-       <app-left-menu [menuItems]="menuItems"></app-left-menu>
-    </div>   
-  </div>
-  <div class="content">
-    <app-alert></app-alert>
     <router-outlet></router-outlet>
-  </div>
 </div>
