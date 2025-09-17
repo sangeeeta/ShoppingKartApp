@@ -5,12 +5,14 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { LeftMenuComponent } from './components/left-menu-component/left-menu.component';
 import { RouterModule } from "@angular/router";
 import '@iconify/iconify';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     LeftMenuComponent,
-    AlertComponent
+    AlertComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import '@iconify/iconify';
   exports: [
     LayoutComponent,
     LeftMenuComponent,
-    AlertComponent
+    AlertComponent,
+    HeaderComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })

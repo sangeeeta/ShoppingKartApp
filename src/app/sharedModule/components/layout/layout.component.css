@@ -1,6 +1,6 @@
 .layout-container {
   display: flex;
-  height: 100vh; /* full viewport height */
+  height: 100vh; 
 }
 
 .sidebar {
@@ -9,11 +9,12 @@
 }
 
 .sidebar.collapsed {
-  width: 60px; /* collapsed width */
+  width: 60px; 
 }
 
 .main-content {
-  flex: 1; /* take remaining space */
+  flex: 1; 
   padding: 20px;
   overflow: auto;
+  margin-top: 60px;
 }
