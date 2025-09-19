@@ -16,10 +16,12 @@ export class LoginComponent {
   loginForm: any;
   submitted = false;
   Subscriber: Subscription[] = [];
+  errorMessage: string = '';
+  loading = false;
 
   constructor(
-    private readonly fb: FormBuilder, 
-    private readonly authService: AuthService, 
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
     private readonly router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -38,9 +40,15 @@ export class LoginComponent {
       next: (res) => {
         const role = res.role;
         this.navigateByRole(role);
+        this.loading = false;
       },
       error: (err) => {
-        console.error('Login failed:', err);
+        if (err.status === 401) {
+          this.errorMessage = 'Invalid User ID or Password';
+        } else {
+          this.errorMessage = 'Something went wrong. Please try again.';
+        }
+        this.loading = false;
       }
     }));
   }
