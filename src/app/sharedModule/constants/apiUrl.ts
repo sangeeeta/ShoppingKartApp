@@ -7,4 +7,5 @@ export const apiUrls = {
     //updateOrder: `shopping/updateOrder`,
     deleteOrder: `shopping/deleteOrder`,
     //saveProduct: `shopping/${version}/save`,
+    login : `User/login`
 }

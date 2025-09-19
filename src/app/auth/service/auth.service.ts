@@ -2,37 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { apiUrls } from '../../sharedModule/constants/apiUrl';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private apiUrl = 'https://yourapi.com/api/auth';
+  private baseUrl = environment.API_URL;
   private loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
   loggedIn$ = this.loggedInSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
 
   login(credentials: any): Observable<any> {
-    //TODO: after integrating backend remove the mocked response
-    // return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
-    //   tap((res: any) => {
-    //     //TODO after intigrating backend remove it
-    //     res.token = 12345;
-    //     res.role = 'admin';
-    //     localStorage.setItem('token', res.token);
-    //     localStorage.setItem('role', res.role);
-    //   })
-    // );
+    return this.http.post(`${this.baseUrl}/${apiUrls.login}`, credentials).pipe(
+      tap((res: any) => {
+        if (res && res.token && res.role) {
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('role', res.role);
+          this.loggedInSubject.next(true);
+        }
 
-    // Mocked login response using RxJS 'of'
-    return new Observable<any>((observer) => {
-      const res = { token: '12345', role: 'dealer' };
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('role', res.role);
-      this.loggedInSubject.next(true);
-      observer.next(res);
-      observer.complete();
-    });
+      })
+    );
   }
 
   getRole(): string | null {

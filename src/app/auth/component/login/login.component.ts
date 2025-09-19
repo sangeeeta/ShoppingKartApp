@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,11 @@ export class LoginComponent {
 
   loginForm: any;
   submitted = false;
+  Subscriber: Subscription[] = [];
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      userId: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
@@ -28,7 +30,7 @@ export class LoginComponent {
     this.submitted = true;
     if (this.loginForm.invalid) return;
 
-    this.authService.login(this.loginForm.value).subscribe({
+    this.Subscriber.push(this.authService.login(this.loginForm.value).subscribe({
       next: (res) => {
         const role = res.role;
         this.navigateByRole(role);
@@ -36,7 +38,7 @@ export class LoginComponent {
       error: (err) => {
         console.error('Login failed:', err);
       }
-    });
+    }));
   }
 
   ngOnInit() {
@@ -61,6 +63,10 @@ export class LoginComponent {
       default:
         this.router.navigate(['/login']);
     }
+  }
+
+  ngOnDestroy() {
+    this.Subscriber.forEach(sub => sub.unsubscribe());
   }
 
 
