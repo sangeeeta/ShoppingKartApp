@@ -11,7 +11,7 @@ export class LeftMenuComponent implements OnInit {
 
   menuItems: MenuItem[] = [];
 
-  constructor(private authService: AuthService) { }
+  constructor(private readonly authService: AuthService) { }
 
   ngOnInit(): void {
     const role = this.authService.getRole() || '';

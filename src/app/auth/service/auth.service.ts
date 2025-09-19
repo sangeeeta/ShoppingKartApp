@@ -12,7 +12,7 @@ export class AuthService {
   private loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
   loggedIn$ = this.loggedInSubject.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private readonly http: HttpClient, private readonly router: Router) { }
 
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/${apiUrls.login}`, credentials).pipe(

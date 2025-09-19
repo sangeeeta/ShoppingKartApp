@@ -24,9 +24,9 @@ export class ProductsComponent {
 
   constructor(
     private readonly productService: ProductService,
-    private modalService: NgbModal,
-    private fb: FormBuilder,
-    private alertService: AlertService
+    private readonly modalService: NgbModal,
+    private readonly fb: FormBuilder,
+    private readonly alertService: AlertService
   ) {
     this.productForm = this.fb.group({
       id: [0],

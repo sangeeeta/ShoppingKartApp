@@ -17,7 +17,11 @@ export class LoginComponent {
   submitted = false;
   Subscriber: Subscription[] = [];
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private readonly fb: FormBuilder, 
+    private readonly authService: AuthService, 
+    private readonly router: Router
+  ) {
     this.loginForm = this.fb.group({
       userId: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8)]]

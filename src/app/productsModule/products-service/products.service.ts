@@ -17,7 +17,7 @@ export interface Product {
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
   private baseUrl = environment.API_URL;
   contentType = 'application/json';
 

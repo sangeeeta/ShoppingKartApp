@@ -15,7 +15,7 @@ import { MENU_ITEMS } from './sharedModule/components/left-menu-component/menu-i
 
 })
 export class AppComponent {
-  constructor(private authService: AuthService) {
+  constructor(private readonly authService: AuthService) {
     // subscribe to login changes
     this.authService.loggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
