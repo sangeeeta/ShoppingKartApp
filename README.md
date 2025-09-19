@@ -36,18 +36,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ```markdown
 ## 📂 Folder Structure (Diagram)
 
-```mermaid
-graph TD
-  A[ShoppingKartApp] --> B[src]
-  B --> C[app]
-  C --> D[components]
-  C --> E[services]
-  C --> F[models]
-  B --> G[assets]
-  B --> H[environments]
-  A --> I[angular.json]
-  A --> J[package.json]
-  A --> K[tsconfig.json]
-
-
 
