@@ -40,7 +40,7 @@ export class ProductService {
 
   //Save product
   saveUpdateOrdrer(product: Product) {
-    const url = `${this.baseUrl}/${apiUrls.saveUpdateOrdrer}`;
+    const url = `${this.baseUrl}/${apiUrls.saveUpdateProduct}`;
     const header = new HttpHeaders({
       'content-type': this.contentType
     });
@@ -49,7 +49,7 @@ export class ProductService {
   }
   // Delete product by ID
   deleteProduct(id: number) {
-    const url = `${this.baseUrl}/${apiUrls.deleteOrder}`;
+    const url = `${this.baseUrl}/${apiUrls.deleteProduct}`;
     const header = new HttpHeaders({
       'content-type': this.contentType
     });

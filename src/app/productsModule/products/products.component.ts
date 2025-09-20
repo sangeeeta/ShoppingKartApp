@@ -40,7 +40,6 @@ export class ProductsComponent {
 
   ngOnInit() {
     this.fetchAllProducts();
-
   }
 
   fetchAllProducts() {
