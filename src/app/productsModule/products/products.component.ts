@@ -59,7 +59,6 @@ export class ProductsComponent {
   }
 
   deleteProduct(productId: number) {
-    console.log(`Deleting product with ID: ${productId}`);
     this.Subscriber.push(
       this.productService.deleteProduct(productId).subscribe({
         next: (response: any) => {

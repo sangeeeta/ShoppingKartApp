@@ -4,6 +4,6 @@ export const apiUrls = {
     getAllProducts: `Product/GetProducts`,
     getProductById: `Product/GetProductById`,
     saveUpdateProduct: `Product/SaveUpdateProduct`,
-    deleteProduct: `shopping/deleteProduct`,
+    deleteProduct: `Product/deleteProduct`,
     login : `User/login`
 }
