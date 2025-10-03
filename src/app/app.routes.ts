@@ -9,6 +9,10 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: 'signup',
+    loadChildren: () => import('./signupModule/sign-up.module').then(m => m.SignUpModule)
+  },
+  {
     path: '',
     component: LayoutComponent,
     children: [
@@ -33,4 +37,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiUrls } from '../../sharedModule/constants/apiUrl';
-import { environment } from '../../../environments/environment';
+import { content, environment } from '../../../environments/environment';
 
 export interface Product {
   id: number;
@@ -19,7 +19,6 @@ export class ProductService {
 
   constructor(private readonly http: HttpClient) { }
   private baseUrl = environment.API_URL;
-  contentType = 'application/json';
 
   // Get all products
   getProductsList() {
@@ -31,7 +30,7 @@ export class ProductService {
   getProductsById(id: number) {
     const url = `${this.baseUrl}/${apiUrls.getProductById}`;
     const header = new HttpHeaders({
-      'content-type': this.contentType
+      'content-type': content.contentType
     });
     const productId = { id: id };
     const requestBody = JSON.stringify(productId);
@@ -42,7 +41,7 @@ export class ProductService {
   saveUpdateOrdrer(product: Product) {
     const url = `${this.baseUrl}/${apiUrls.saveUpdateProduct}`;
     const header = new HttpHeaders({
-      'content-type': this.contentType
+      'content-type': content.contentType
     });
     const requestBody = JSON.stringify(product);
     return this.http.post(url, requestBody, { headers: header });
@@ -51,7 +50,7 @@ export class ProductService {
   deleteProduct(id: number) {
     const url = `${this.baseUrl}/${apiUrls.deleteProduct}`;
     const header = new HttpHeaders({
-      'content-type': this.contentType
+      'content-type': content.contentType
     });
     const productId = { id: id };
     const requestBody = JSON.stringify(productId);
